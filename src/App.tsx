@@ -1,4 +1,10 @@
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import {
+  createTheme,
+  CssBaseline,
+  makeStyles,
+  ThemeProvider,
+} from "@mui/material";
+import { dark } from "@mui/material/styles/createPalette";
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
@@ -11,17 +17,14 @@ import Home from "./Pages/Home";
 import Results from "./Pages/Results";
 import Test from "./Pages/Test/Test";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2",
-    },
-  },
-});
+const theme = createTheme({ palette: dark });
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ background: theme.palette.background.default }}
+    >
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
