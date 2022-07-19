@@ -15,6 +15,7 @@ const renderReactDom = () => {
   );
 };
 
+// @ts-ignore
 if (window.cordova) {
   document.addEventListener(
     "deviceready",

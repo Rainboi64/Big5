@@ -1,12 +1,13 @@
 {
-  "name": "io.cordova.hellocordova",
-  "displayName": "HelloCordova",
+  "name": "com.codingswat.bigfive",
+  "displayName": "Big5",
   "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "description": "A Big5 assesment app",
   "main": "index.js",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.0",
     "@mui/styles": "^5.9.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -16,12 +17,15 @@
     "@types/node": "^16.11.45",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "firebase": "^9.9.0",
+    "firebase-tools": "^11.3.0",
     "i18next": "^21.8.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.1",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "rimraf": "^3.0.2",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
@@ -29,16 +33,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron-dev": "cordova run electron --nobuild"
   },
   "keywords": [
     "ecosystem:cordova"
   ],
-  "author": "Apache Cordova Team",
+  "author": "CodingSwatt",
   "license": "Apache-2.0",
-  "devDependencies": {
-    "cordova-electron": "^3.1.0"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -51,9 +53,15 @@
       "last 1 safari version"
     ]
   },
+  "homepage": "./",
   "cordova": {
     "platforms": [
-      "electron"
+      "electron",
+      "android"
     ]
+  },
+  "devDependencies": {
+    "cordova-android": "^10.1.2",
+    "cordova-electron": "^3.1.0"
   }
 }

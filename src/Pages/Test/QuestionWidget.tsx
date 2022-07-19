@@ -26,7 +26,7 @@ export default function QuestionWidget(questionProps: {
   return (
     <Card elevation={4} variant={"outlined"} className={classes.container}>
       <FormControl>
-        <CardContent>
+        <CardContent className={classes.content}>
           <FormLabel className={classes.cardLabel}>
             <Typography className={classes.questionNo} color="text.secondary">
               {idx + 1}.
@@ -34,8 +34,12 @@ export default function QuestionWidget(questionProps: {
           </FormLabel>
           <Typography variant="h5">{question.Text}</Typography>
         </CardContent>
-        <CardActions>
-          <RadioGroup className={classes.group} sx={{ flexWrap: "nowrap" }} row>
+        <CardActions className={classes.group}>
+          <RadioGroup
+            className={classes.group}
+            sx={{ flexWrap: "nowrap", justifySelf: "center" }}
+            row
+          >
             <FormControlLabel
               value={-2}
               control={<Radio color="error" />}
@@ -95,11 +99,18 @@ export default function QuestionWidget(questionProps: {
 const useStyles = makeStyles({
   container: {
     width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "right",
+  },
+  content: {
+    display: "flex",
+    gap: 10,
+    justifyContent: "right",
   },
   questionNo: {
     fontSize: 14,
   },
-  redBorder: { borderColor: "red" },
   cardLabel: {
     display: "flex",
     flexDirection: "row",
@@ -111,6 +122,7 @@ const useStyles = makeStyles({
   group: {
     display: "flex",
     flexWrap: "nowrap",
+    justifyContent: "center",
     flexDirection: "row",
   },
 });
