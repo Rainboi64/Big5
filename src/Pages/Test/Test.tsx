@@ -1,30 +1,49 @@
-import { Button, MobileStepper, Pagination } from "@mui/material";
+import { Box, Button, MobileStepper, Pagination } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useCallback, useMemo, useRef, useState } from "react";
-import { Questions } from "./Questions";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import QuestionWidget from "./QuestionWidget";
 import { Answer } from "./Types/Answer";
 import { Question } from "./Types/Question";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { getQuestions, saveResult } from "../../firebase";
+import { calculateResult } from "./Types/Result";
+import { useNavigate } from "react-router-dom";
 
 export default function Test() {
   const classes = useStyles();
 
   const [range, setRange] = useState(1);
+  const [questions, setQuestions] = useState<Question[]>([]);
 
-  const shuffledQuestions = useMemo(
-    () => Questions.sort(() => Math.random() - 0.5),
-    []
-  );
+  const navigate = useNavigate();
 
-  const questionCount = useMemo(() => Questions.length, []);
+  useEffect(() => {
+    async function loadData() {
+      const questions = (await getQuestions("arabic")).questions;
+      setQuestions(questions.sort(() => Math.random() - 0.5));
+    }
 
-  const answersRef = useRef(new Array<Answer>(Questions.length));
+    if (!questions.length) {
+      loadData();
+    }
+  }, [questions]);
+
+  const answersRef = useRef<Array<Answer>>([]);
 
   const nextPage = useCallback(
-    (e?: React.MouseEvent<unknown>) => {
-      setRange(range + 1);
+    async (e?: React.MouseEvent<unknown>) => {
+      if (range === questions.length / 10) {
+        const result = calculateResult(answersRef.current);
+        await saveResult(result);
+        navigate("/results");
+      } else setRange(range + 1);
     },
     [range, setRange]
   );
@@ -51,29 +70,27 @@ export default function Test() {
   return (
     <div className={classes.container}>
       <div className={classes.questions}>
-        {shuffledQuestions.map((question, idx) =>
-          idx >= (range - 1) * 10 && idx < range * 10 ? (
-            <QuestionWidget
-              question={question}
-              idx={idx}
-              onSelect={setResult}
-            />
-          ) : null
-        )}
+        {questions.map((question, idx) => {
+          if (idx >= (range - 1) * 10 && idx < range * 10) {
+            return (
+              <QuestionWidget
+                question={question}
+                idx={idx}
+                onSelect={setResult}
+              />
+            );
+          }
+        })}
       </div>
       <div>
         <MobileStepper
           variant="progress"
-          steps={questionCount / 10}
+          steps={questions.length / 10 + 1}
           position="static"
           activeStep={range}
           sx={{ maxWidth: 400, flexGrow: 1 }}
           nextButton={
-            <Button
-              size="small"
-              onClick={nextPage}
-              disabled={range === questionCount / 10}
-            >
+            <Button size="small" onClick={nextPage}>
               <KeyboardArrowRight />
             </Button>
           }

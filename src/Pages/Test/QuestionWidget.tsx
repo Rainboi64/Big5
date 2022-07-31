@@ -39,6 +39,9 @@ export default function QuestionWidget(questionProps: {
             className={classes.group}
             sx={{ flexWrap: "nowrap", justifySelf: "center" }}
             row
+            onChange={(e) => {
+              onSelect(idx, question, Number(e.target.value));
+            }}
           >
             <FormControlLabel
               value={-2}
