@@ -123,52 +123,52 @@ function App() {
     >
       <CssBaseline />
       <ThemeProvider theme={theme}>
-        <HashRouter>
-          <AppBar>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                sx={{ color: "inherit" }}
-                onClick={toggleDrawer}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                The Big 5 Assesment
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <Box>
-            <Drawer
-              variant="temporary"
-              open={drawer}
-              onClose={toggleDrawer}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}
-              sx={{
-                "& .MuiDrawer-paper": {
-                  boxSizing: "border-box",
-                  width: drawerWidth,
-                },
-              }}
-            >
-              <Box onClick={toggleDrawer} sx={{ textAlign: "center" }}>
-                <Typography variant="h6" sx={{ my: 2 }}>
+        {loaded ? (
+          <HashRouter>
+            <AppBar>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  sx={{ color: "inherit" }}
+                  onClick={toggleDrawer}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                   The Big 5 Assesment
                 </Typography>
-                <Divider />
-                <NavMenu />
-                <MaterialUISwitch
-                  checked={mode !== "light"}
-                  onChange={(e) => {
-                    setMode(mode == "dark" ? "light" : "dark");
-                  }}
-                />
-              </Box>
-            </Drawer>
-          </Box>
-          {loaded ? (
+              </Toolbar>
+            </AppBar>
+            <Box>
+              <Drawer
+                variant="temporary"
+                open={drawer}
+                onClose={toggleDrawer}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  "& .MuiDrawer-paper": {
+                    boxSizing: "border-box",
+                    width: drawerWidth,
+                  },
+                }}
+              >
+                <Box onClick={toggleDrawer} sx={{ textAlign: "center" }}>
+                  <Typography variant="h6" sx={{ my: 2 }}>
+                    The Big 5 Assesment
+                  </Typography>
+                  <Divider />
+                  <NavMenu />
+                  <MaterialUISwitch
+                    checked={mode !== "light"}
+                    onChange={(e) => {
+                      setMode(mode == "dark" ? "light" : "dark");
+                    }}
+                  />
+                </Box>
+              </Drawer>
+            </Box>
             <Box sx={{ paddingTop: "75px", height: "100%" }}>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
@@ -183,12 +183,12 @@ function App() {
                 <Route path="/*" element={<FourZeroFour />} />
               </Routes>
             </Box>
-          ) : (
-            <Box className="centered">
-              <CircularProgress />
-            </Box>
-          )}
-        </HashRouter>
+          </HashRouter>
+        ) : (
+          <Box className="centered">
+            <CircularProgress />
+          </Box>
+        )}
       </ThemeProvider>
     </div>
   );

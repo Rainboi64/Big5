@@ -15,6 +15,7 @@ import MoneyOffIcon from "@mui/icons-material/MoneyOff";
 import TranslateIcon from "@mui/icons-material/Translate";
 import React from "react";
 import { getUser } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const theme = useTheme();
@@ -60,6 +61,9 @@ export default function Dashboard() {
               variant="contained"
               onClick={() => {
                 if (getUser()) {
+                  navigate("/test");
+                } else {
+                  navigate("/login");
                 }
               }}
             >

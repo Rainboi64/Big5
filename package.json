@@ -17,6 +17,12 @@
     "@types/node": "^16.11.45",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "cordova-plugin-browsertab": "0.2.0",
+    "cordova-plugin-buildinfo": "4.0.0",
+    "cordova-plugin-compat": "1.2.0",
+    "cordova-plugin-customurlscheme": "5.0.2",
+    "cordova-plugin-inappbrowser": "5.0.0",
+    "cordova-universal-links-plugin-fix": "1.2.1",
     "firebase": "^9.9.0",
     "firebase-tools": "^11.4.0",
     "i18next": "^21.8.14",
@@ -59,7 +65,19 @@
     "platforms": [
       "electron",
       "android"
-    ]
+    ],
+    "plugins": {
+      "cordova-plugin-buildinfo": {},
+      "cordova-universal-links-plugin": {},
+      "cordova-plugin-browsertab": {},
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-customurlscheme": {
+        "URL_SCHEME": "com.codingswat.big5",
+        "ANDROID_SCHEME": " ",
+        "ANDROID_HOST": " ",
+        "ANDROID_PATHPREFIX": "/"
+      }
+    }
   },
   "devDependencies": {
     "cordova-android": "^10.1.2",

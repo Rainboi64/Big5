@@ -55,83 +55,81 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <Box sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              autoComplete="current-password"
-            />
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{ mt: 1, mb: 1 }}
-              onClick={handleLoginWithGoogle}
-            >
-              Continue with Google!
-            </Button>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 1, mb: 1 }}
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <NavLink to="/reset-password">Forgot password?</NavLink>
-              </Grid>
-              <Grid item xs>
-                <NavLink to="/signup">Sign Up</NavLink>
-              </Grid>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            autoComplete="current-password"
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1, mb: 1 }}
+            onClick={handleLoginWithGoogle}
+          >
+            Continue with Google!
+          </Button>
+          <Button
+            type="button"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 1, mb: 1 }}
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <NavLink to="/reset-password">Forgot password?</NavLink>
             </Grid>
-          </Box>
+            <Grid item xs>
+              <NavLink to="/signup">Sign Up</NavLink>
+            </Grid>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 }

@@ -7,8 +7,9 @@ import {
   styled,
   Switch,
 } from "@mui/material";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../firebase";
+import { getUser, logout } from "../firebase";
 
 export default function NavMenu() {
   const navigate = useNavigate();
@@ -49,7 +50,9 @@ export default function NavMenu() {
       <ListItem disablePadding>
         <ListItemButton
           onClick={() => {
-            navigate("/login");
+            if (!user) {
+              navigate("/login");
+            }
           }}
           sx={{ textAlign: "center" }}
         >
@@ -57,6 +60,21 @@ export default function NavMenu() {
           <ListItemText primary={user ? user?.displayName : "Login"} />
         </ListItemButton>
       </ListItem>
+
+      {user ? (
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              logout().then(() => {
+                navigate("/login");
+              });
+            }}
+            sx={{ textAlign: "center" }}
+          >
+            <ListItemText primary="Sign out" />
+          </ListItemButton>
+        </ListItem>
+      ) : null}
     </>
   );
 }

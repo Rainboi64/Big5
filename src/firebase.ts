@@ -9,6 +9,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -29,6 +30,11 @@ const app = initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
 const db = getFirestore();
+
+export async function logout() {
+  const auth = getAuth(app);
+  return signOut(auth);
+}
 
 export function getUser() {
   const auth = getAuth(app);
@@ -61,6 +67,9 @@ export async function createUserWithEmail(
     const auth = getAuth(app);
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
+
+    updateProfile(user, { displayName: name });
+
     await addDoc(collection(db, "users"), {
       uid: user.uid,
       name,

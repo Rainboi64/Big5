@@ -1,12 +1,19 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <hook type="before_prepare" src="scripts/prebuild.js"/>
-    <name>HelloCordova</name>
-    <description>Sample Apache Cordova App</description>
+    <name>Big5</name>
+    <description>A Big 5 Test</description>
     <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
-        Apache Cordova Team
+        Coding Swat Team
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <universal-links>
+        <host name="bigfive-ebc43.web.app" scheme="https" />
+        <host name="bigfive-ebc43.firebaseapp.com" scheme="https">
+            <path url="/#/login"/>
+        </host>
+    </universal-links>
+    <preference name="AndroidLaunchMode" value="singleTask" />
 </widget>

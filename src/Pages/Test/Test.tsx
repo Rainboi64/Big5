@@ -1,4 +1,10 @@
-import { Box, Button, MobileStepper, Pagination } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  MobileStepper,
+  Pagination,
+} from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React, {
   useCallback,
@@ -12,7 +18,7 @@ import { Answer } from "./Types/Answer";
 import { Question } from "./Types/Question";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { getQuestions, saveResult } from "../../firebase";
+import { getQuestions, getUser, saveResult } from "../../firebase";
 import { calculateResult } from "./Types/Result";
 import { useNavigate } from "react-router-dom";
 
@@ -31,6 +37,9 @@ export default function Test() {
     }
 
     if (!questions.length) {
+      if (!getUser()) {
+        navigate("/login");
+      }
       loadData();
     }
   }, [questions]);
@@ -67,7 +76,7 @@ export default function Test() {
     []
   );
 
-  return (
+  return questions.length ? (
     <div className={classes.container}>
       <div className={classes.questions}>
         {questions.map((question, idx) => {
@@ -102,6 +111,8 @@ export default function Test() {
         />
       </div>
     </div>
+  ) : (
+    <CircularProgress className="centered"></CircularProgress>
   );
 }
 

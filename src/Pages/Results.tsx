@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { VictoryChart, VictoryBar, VictoryAxis } from "victory";
 import { getResults } from "../firebase";
@@ -89,7 +90,9 @@ export default function Results() {
       />
     </VictoryChart>
   ) : (
-    <div />
+    <Box>
+      <Typography variant="h1">No data, consider doing a test!</Typography>
+    </Box>
   );
 }
 // export default function Results() {
